@@ -133,7 +133,7 @@ public class Connection {
 					search = buffer.getUsers().get(i);
 					
 					//Get Name
-					if(search.getName().equals(filter)){
+					if(search.getName().contains(filter)){
 						filteredUser.add(search);
 					}
 				}
@@ -143,7 +143,7 @@ public class Connection {
 					search = buffer.getUsers().get(i);
 					
 					//Get Name
-					if(!search.getName().equals(filter)){
+					if(!search.getName().contains(filter)){
 						filteredUser.add(search);
 					}
 				}
@@ -341,6 +341,15 @@ public class Connection {
     	
     	search = null;
     	return search;
+    }
+    
+    public Team joinTeamID(Integer teamID) {
+    	for(int i=0; i<buffer.getTeams().size(); i++) {
+    		if(buffer.getTeams().get(i).getTeamID() == teamID) {
+    			return buffer.getTeams().get(i);
+    		}
+    	}
+    	return null;
     }
     
     public ArrayList<User> getUsers(){

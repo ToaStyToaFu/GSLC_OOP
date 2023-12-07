@@ -33,6 +33,10 @@ public class Team extends Model implements TeamRepository{
 		return connection.findOneTeam(filterType, filter);
 	}
 	
+	public Team joinTeamID(Integer teamID, Connection connection) {
+		return connection.joinTeamID(teamID);
+	}
+	
 	public String getTeamName() {
 		return teamName;
 	}

@@ -81,25 +81,42 @@ public class Main {
 						if(condition == 1) {
 							System.out.println("Add condition, seperate by semicolon [filterType (e.g name, teamid);= or !=;filter");
 							String[] temp = sc.nextLine().split(";");
+							
+							System.out.println("Use join? (y/n)");
+							String useJoin;
+							do {
+								useJoin = sc.nextLine();
+							}while(!useJoin.equalsIgnoreCase("y") && !useJoin.equalsIgnoreCase("n"));
+							
+							Boolean join = false;
+							if(useJoin.equalsIgnoreCase("y")) {
+								join = true;
+							}
+							else if(useJoin.equalsIgnoreCase("n")) {
+								join = false;
+							}
+							
 							try {
 								String filterType = temp[0];
 								String[] filter = {temp[1], temp[2]};
 								String table = null;
 								
-								//With join (query team name??? idk)
-//								if(!filterType.equalsIgnoreCase("teamname")) {
-//									table = "Team";
-//									
-//									ArrayList<User> filteredUser = userRepository.find(filterType, filter, true, table, connection);
-//									System.out.println("NIM | Name | Team Name");
-//									for(int i=0; i<filteredUser.size(); i++) {
-//										System.out.println(filteredUser.get(i).getNIM() + " | " + filteredUser.get(i).getName() + " | " + filteredUser.get(i).getTeamID());
-//												
-//									}
-//								}
+								//With join
+								if(join) {
+									table = "Team";
+									
+									ArrayList<User> filteredUser = userRepository.find(filterType, filter, true, table, connection);
+									Team joinTeam;
+									System.out.println("NIM | Name | Team Name");
+									for(int i=0; i<filteredUser.size(); i++) {
+										joinTeam = teamRepository.joinTeamID(filteredUser.get(i).getTeamID(), connection);
+										System.out.println(filteredUser.get(i).getNIM() + " | " + filteredUser.get(i).getName() + " | " + joinTeam.getTeamName());
+												
+									}
+								}
 								
-								//Without join (i guess)
-								if(!filterType.equalsIgnoreCase("teamname")) {
+								//Without join
+								if(!join) {
 									ArrayList<User> filteredUser = userRepository.find(filterType, filter, false, null, connection);
 									System.out.println("NIM | Name | TeamID");
 									for(int i=0; i<filteredUser.size(); i++) {

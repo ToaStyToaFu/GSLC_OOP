@@ -9,4 +9,5 @@ public interface TeamRepository {
 	ArrayList<Team> find(String filterType, String[] filter, Connection connection);
 	Team findOne(String filterType, String[] filter, Connection connection);
 	ArrayList<Team> getTeams(Connection connection);
+	Team joinTeamID(Integer teamID, Connection connection);
 }
