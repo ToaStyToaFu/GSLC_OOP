@@ -105,7 +105,7 @@ public class Main {
 								if(join) {
 									table = "Team";
 									
-									ArrayList<User> filteredUser = userRepository.find(filterType, filter, true, table, connection);
+									ArrayList<User> filteredUser = userRepository.find(filterType, filter, join, table, connection);
 									Team joinTeam;
 									System.out.println("NIM | Name | Team Name");
 									for(int i=0; i<filteredUser.size(); i++) {
